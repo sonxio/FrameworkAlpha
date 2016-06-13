@@ -1,4 +1,4 @@
 ¡·±¸·ÝMYSQL
 
-SONGMBP:~ song$ mysqldump -h localhost -u root -p --databases TESTDB > mysqldump.sql
+SONGMBP:~ song$ mysqldump -h localhost -u root -p --databases TESTDB > MYSQLBACKUP-201606131036-ChangedEncoding.sql
 Enter password: 
