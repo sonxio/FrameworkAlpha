@@ -1,0 +1,4 @@
+¡·±¸·ÝMYSQL
+
+SONGMBP:~ song$ mysqldump -h localhost -u root -p --databases TESTDB > mysqldump.sql
+Enter password: 
