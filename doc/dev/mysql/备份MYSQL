@@ -1,4 +1,9 @@
-¡·±¸·ÝMYSQL
+BACKUP MYSQL
 
 SONGMBP:~ song$ mysqldump -h localhost -u root -p --databases TESTDB > MYSQLBACKUP-201606131036-ChangedEncoding.sql
 Enter password: 
+
+
+
+
+mysqldump -h localhost -u root -p --databases TESTDB > MYSQLBACKUP-201606141345-ChangedEncodingToUTF8.sql
