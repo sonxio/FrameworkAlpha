@@ -7,7 +7,7 @@
     </session-config>
     <jsp-config>
         <jsp-property-group>
-            <description>header and footer settings</description>
+            <description>header and footer settings 测试配置文件中编码是否正常</description>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>

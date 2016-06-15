@@ -8,3 +8,6 @@
 /project-nb/FA/FA-war/dist/
 /project-nb/FA/FA-ejb/build/
 /project-nb/FA/FA-ejb/dist/
+*.war
+
+*.war
