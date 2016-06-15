@@ -1,1 +1,10 @@
 /bin/
+/project-nb/FA/nbproject/private/
+/project-nb/FA/FA-war/nbproject/private/
+/project-nb/FA/FA-ejb/nbproject/private/
+/project-nb/FA/dist/
+/project-nb/FA/build/
+/project-nb/FA/FA-war/build/
+/project-nb/FA/FA-war/dist/
+/project-nb/FA/FA-ejb/build/
+/project-nb/FA/FA-ejb/dist/
