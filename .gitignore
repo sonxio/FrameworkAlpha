@@ -11,3 +11,15 @@
 *.war
 
 *.war
+/project-nb/prototype/FA/nbproject/private/
+/project-nb/prototype/FA/FA-ejb/nbproject/private/
+/project-nb/prototype/FA-ear/nbproject/private/
+/project-nb/prototype/FA-ear/FA-ejb/nbproject/private/
+/project-nb/prototype/nbproject/private/
+/project-nb/prototype/build/
+/project-nb/prototype/prototype-war/nbproject/private/
+/project-nb/prototype/prototype-ejb/nbproject/private/
+/project-nb/prototype/prototype-ejb/build/
+/project-nb/prototype/prototype-ejb/dist/
+/project-nb/prototype/prototype-war/build/
+/project-nb/prototype/prototype-war/dist/

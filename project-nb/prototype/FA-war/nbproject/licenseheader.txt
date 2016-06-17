@@ -1,7 +1,0 @@
-<#if licenseFirst??>
-${licenseFirst}
-</#if>
-${licensePrefix}IBM GTS
-<#if licenseLast??>
-${licenseLast}
-</#if>
