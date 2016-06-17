@@ -1,7 +1,7 @@
 /*
  * IBM GTS
  */
-package com.ibm.fa.demo.controller;
+package com.ibm.fa.prototype.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
