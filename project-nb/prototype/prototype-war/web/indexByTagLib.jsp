@@ -3,6 +3,10 @@
 <%@page pageEncoding="UTF-8"%>
 
 
+<sql:query var="categories" dataSource="jdbc/affablebean">
+    SELECT * FROM category
+</sql:query>
+
 <div id="indexLeftColumn">
     <div id="welcomeText">
         <p>[ welcome text ]<!-- test to access context parameters -->

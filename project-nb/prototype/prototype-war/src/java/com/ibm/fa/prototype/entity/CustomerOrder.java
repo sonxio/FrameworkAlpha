@@ -2,8 +2,10 @@ package com.ibm.fa.prototype.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,11 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -55,6 +59,8 @@ public class CustomerOrder implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customerId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerOrder")
+    private Collection<OrderedProduct> orderedProductCollection;
 
     public CustomerOrder() {
     }
@@ -107,6 +113,15 @@ public class CustomerOrder implements Serializable {
 
     public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
+    }
+
+    @XmlTransient
+    public Collection<OrderedProduct> getOrderedProductCollection() {
+        return orderedProductCollection;
+    }
+
+    public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
+        this.orderedProductCollection = orderedProductCollection;
     }
 
     @Override

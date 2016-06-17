@@ -40,9 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByLastUpdate", query = "SELECT p FROM Product p WHERE p.lastUpdate = :lastUpdate")})
 public class Product implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private Collection<OrderedProduct> orderedProductCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,6 +67,8 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private Collection<OrderedProduct> orderedProductCollection;
 
     public Product() {
     }
@@ -133,6 +132,15 @@ public class Product implements Serializable {
         this.categoryId = categoryId;
     }
 
+    @XmlTransient
+    public Collection<OrderedProduct> getOrderedProductCollection() {
+        return orderedProductCollection;
+    }
+
+    public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
+        this.orderedProductCollection = orderedProductCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -156,15 +164,6 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "com.ibm.fa.prototype.entity.Product[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<OrderedProduct> getOrderedProductCollection() {
-        return orderedProductCollection;
-    }
-
-    public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
-        this.orderedProductCollection = orderedProductCollection;
     }
     
 }
