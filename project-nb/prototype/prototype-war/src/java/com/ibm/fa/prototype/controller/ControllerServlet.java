@@ -3,9 +3,13 @@
  */
 package com.ibm.fa.prototype.controller;
 
+import com.ibm.fa.prototype.entity.Category;
+import com.ibm.fa.prototype.entity.Product;
 import com.ibm.fa.prototype.session.CategoryFacade;
+import com.ibm.fa.prototype.sessionBean.OrderManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +36,8 @@ public class ControllerServlet extends HttpServlet {
 
     @EJB
     private CategoryFacade categoryFacade;
-    
+    @EJB
+    private OrderManager orderManager;
     @Override
     public void init() throws ServletException {
 
@@ -55,7 +60,21 @@ public class ControllerServlet extends HttpServlet {
 
         // if category page is requested
         if (userPath.equals("/category")) {
-            // TODO: Implement category request
+            // get categoryId from request
+            String categoryId = request.getQueryString();
+
+            if (categoryId != null) {
+                // get selected category
+                Category selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
+                
+                 // place selected category in request scope
+                 request.setAttribute("selectedCategory", selectedCategory);
+                // get all products for selected category
+                Collection<Product> categoryProducts = selectedCategory.getProductCollection(); 
+                
+                // place category products in request scope
+                request.setAttribute("categoryProducts", categoryProducts);
+            }
 
         // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
@@ -106,8 +125,17 @@ public class ControllerServlet extends HttpServlet {
             // TODO: Implement update cart action
 
         // if purchase action is called
-        } else if (userPath.equals("/purchase")) {
-            // TODO: Implement purchase action
+        } else if (userPath.equals("/purchase")) { 
+            // extract user data from request
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            String cityRegion = request.getParameter("cityRegion");
+            String ccNumber = request.getParameter("creditcard");
+            //这一部分样例代码没有完善,可直接看教程案例:https://netbeans.org/kb/docs/javaee/ecommerce/transaction.html 
+            int orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber);
+    
 
             userPath = "/confirmation";
         }

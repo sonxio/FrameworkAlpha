@@ -1,0 +1,41 @@
+使用EJB保障事务。教程参见：https://netbeans.org/kb/docs/javaee/ecommerce/transaction.html
+
+所有TRANSACTION从进入SESSION BEAN开始，使用TransactionManagementType.CONTAINER，对于方法使用TransactionAttributeType.REQUIRED。
+
+示例代码：
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+public class OrderManager {
+
+    @PersistenceContext(unitName = "AffableBeanPU")
+    private EntityManager em;
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
+
+        try {
+
+
+这也是SESSION BEAN的默认值。
+
+因此所有TRANSACTION从进入第一个EJB方法开始，到离开第一个EJB方法结束。
+
+如果没有明确要求ROLLBACK，当中的所有操作将被COMMIT。因此在发生异常时，必须如下编码，确保ROLLBACK：
+
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+public int placeOrder(String name, String email, String phone, String address, String cityRegion, String ccNumber, ShoppingCart cart) {
+
+    try {
+        Customer customer = addCustomer(name, email, phone, address, cityRegion, ccNumber);
+        CustomerOrder order = addOrder(customer, cart);
+        addOrderedItems(order, cart);
+        return order.getId();
+    } catch (Exception e) {
+        context.setRollbackOnly();
+        return 0;
+    }
+}
+
+
+这就要求对于所有需要事务保障的操作，必须从一个EJB的方法开始执行。
+

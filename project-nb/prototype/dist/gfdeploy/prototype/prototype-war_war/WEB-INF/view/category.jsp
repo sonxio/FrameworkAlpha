@@ -25,7 +25,9 @@
 </sql:query --%>
 
 <!-- 获取JSP参数 -->
-<p id="categoryTitle">${selectedCategory.rows[0].name}</p>
+<p id="categoryTitle">
+    <span style="background-color: #f5eabe; padding: 7px;">${selectedCategory.name}</span>
+</p>
 
 <div id="categoryLeftColumn">
     
@@ -55,7 +57,7 @@
 
 <table id="productTable">
 
-    <c:forEach var="product" items="${categoryProducts.rows}" varStatus="iter">
+    <c:forEach var="product" items="${categoryProducts}" varStatus="iter">
 
         <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
             <td>
