@@ -1,0 +1,18 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/common/common.css">
+        <title>EXAMPLE 2</title>
+    </head>
+    <body>
+
+        <!-- 项目标题  -->
+        <div id="header">
+            示例2<br/>
+            <!-- 显示APP级别的错误消息 -->
+            <div class="errorMsg">
+                没有错误信息
+            </div>
+        </div>

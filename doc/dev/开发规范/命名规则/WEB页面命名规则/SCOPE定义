@@ -1,0 +1,5 @@
+所有WEB页面划分为下面几个SCOPE：
+
+APP SCOPE。对整个应用均有影响，例如index.jsp，或作用于整个应用的footer/header
+
+PAGE SCOPE

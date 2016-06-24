@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <jsp-config>
+        <jsp-property-group>
+            <description>公用JSP HEADER/FOOTER</description>
+            <display-name>common</display-name>
+            <!-- 把需要使用公用HEADER/FOOTER的都写在下面.不得使用/*作为url-pattern,因为这会导致图片/CSS资源也被加上HEADER/FOOTER -->
+            <url-pattern>/index.jsp</url-pattern>
+            <include-prelude>/WEB-INF/jspf/common/header.jspf</include-prelude>
+            <include-coda>/WEB-INF/jspf/common/footer.jspf</include-coda>
+        </jsp-property-group>
+    </jsp-config>
+</web-app>
