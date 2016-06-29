@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <!-- 不要采用/faces/*作为JSF的URL PATTER,因为这样会让页面引用IMAGE/CSS时的路径变麻烦 -->
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <!-- 从faces开始,后面对应了WEB PAGE目录的真实目录名称 -->
+        <welcome-file>frontpage/confirmUser.xhtml</welcome-file>
+        <!--从PROJECT>PROPERTIES>FRAMEWORK中引入JSF后,这里常常出现重复 welcome-file>index.jsp</welcome-file-->
     </welcome-file-list>
-    <jsp-config>
-        <jsp-property-group>
-            <description>公用JSP HEADER/FOOTER</description>
-            <display-name>common</display-name>
-            <!-- 把需要使用公用HEADER/FOOTER的都写在下面.不得使用/*作为url-pattern,因为这会导致图片/CSS资源也被加上HEADER/FOOTER -->
-            <url-pattern>/index.jsp</url-pattern>
-            <include-prelude>/WEB-INF/jspf/common/header.jspf</include-prelude>
-            <include-coda>/WEB-INF/jspf/common/footer.jspf</include-coda>
-        </jsp-property-group>
-    </jsp-config>
 </web-app>
