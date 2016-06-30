@@ -9,15 +9,15 @@
         <ui:composition template="/common/template.xhtml">
 
             <ui:define name="title">
-                Response
+                登录失败
             </ui:define>
 
             <ui:define name="box">
-                <h4><h:outputText escape="false" value="#{CurrentUserBean.welcomeMsg}"/></h4>
+                提供的信息有误,不能登录.
 
                 <h:form prependId="false">
 
-                    <h:commandButton id="backButton" value="返回" action="inputDeviceId" />
+                    <h:commandButton id="backButton" value="返回" action="/login/form_login" />
 
                 </h:form>
             </ui:define>

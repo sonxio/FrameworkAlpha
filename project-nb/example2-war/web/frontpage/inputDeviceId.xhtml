@@ -11,7 +11,7 @@
         考虑到目录名称日后可能发生变化,因此应尽可能把同一个模块的卸载同一个目录中,并不加/来引用其他XHTML文件.
         if the template path in ui:composition starts with /, then it is relative to the WebContent. 
         But if it does not start with /, then it is relative to the current file. -->
-        <ui:composition template="template.xhtml">
+        <ui:composition template="/common/template.xhtml">
 
             <ui:define name="title">
                 Greeting
@@ -21,13 +21,15 @@
                 <h5>确认用户信息</h5>
 
                 <h:form>
-                    检查ID是否正确
-                    <h:inputText id="id" size="10" maxlength="10" value="#{CurrentUserBean.id}"/>
+                    请输入你的设备编号
+                    <h:inputText id="deviceId" size="10" maxlength="10" value="#{CurrentUserBean.deviceId}"/>
                     <!-- action前是否加/的原则和template是一样的,如果不加/,表示相对于当前文件. -->
                     <h:commandButton id="submit" value="提交" action="frontpage"/>
                 </h:form>
             </ui:define>
-
+            <ui:define name="rightColumn">
+                <h:graphicImage library="theme1" name="img/duke.png" />                
+            </ui:define>
         </ui:composition>
 
     </body>

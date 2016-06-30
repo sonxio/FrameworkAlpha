@@ -16,7 +16,52 @@
     </servlet-mapping>
     <welcome-file-list>
         <!-- 从faces开始,后面对应了WEB PAGE目录的真实目录名称 -->
-        <welcome-file>frontpage/confirmUser.xhtml</welcome-file>
+        <welcome-file>login/form_login.xhtml</welcome-file>
         <!--从PROJECT>PROPERTIES>FRAMEWORK中引入JSF后,这里常常出现重复 welcome-file>index.jsp</welcome-file-->
     </welcome-file-list>
+    <security-constraint>
+        <display-name>appuser constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>appuser resource</web-resource-name>
+            <description>开放给普通用户访问的页面</description>
+            <!-- 注意:这里的URL PATTERN不能包括/*,否则将会导致RESOURCE不能加载,例如CSS/JS/IMAGE等 
+            对于需要开放给appuser的URL PATTER你这里都要逐一写下,一来方便权限的细化控制,二来避免未上线的内容错误被用户访问-->            
+            <url-pattern>/frontpage/*</url-pattern>
+            <url-pattern>/item/*</url-pattern>
+            <!-- 这里目前没有对HTTP METHOD进行限制,例如GET/POST/TRACK,是因为目前不确定限制后,对于没有提及的HTTP METHOD是不允许还是允许.将来可以不在APP层面进行限制,而在WEB SERVER层限制 -->
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>appuser</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>appadmin constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>appadmin resource</web-resource-name>
+            <description>仅开放给管理员访问的页面</description>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>appadmin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <!-- 设置了这两个页面后,WEB应用访问任何页面时自动就会先打开这里的登录页面 -->
+            <form-login-page>/login/form_login.xhtml</form-login-page>
+            <form-error-page>/login/form_error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>应用管理员</description>
+        <role-name>appadmin</role-name>
+    </security-role>
+    <security-role>
+        <description>普通用户</description>
+        <role-name>appuser</role-name>
+    </security-role>
 </web-app>

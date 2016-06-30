@@ -9,20 +9,15 @@
         <ui:composition template="/common/template.xhtml">
 
             <ui:define name="title">
-                Response
+                管理页面
             </ui:define>
 
             <ui:define name="box">
-                <h4><h:outputText escape="false" value="#{CurrentUserBean.welcomeMsg}"/></h4>
-
-                <h:form prependId="false">
-
-                    <h:commandButton id="backButton" value="返回" action="inputDeviceId" />
-
-                </h:form>
+                这里可以管理系统信息, 仅有ADMIN权限可以访问.
+                
             </ui:define>
             <ui:define name="rightColumn">
-                <h:graphicImage library="theme1" name="img/duke.png" />                
+                <h:graphicImage library="theme1" name="img/admin/admin.png" />                
             </ui:define>
         </ui:composition>
 
