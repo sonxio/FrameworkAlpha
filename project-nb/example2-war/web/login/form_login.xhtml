@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/common/template.xhtml">
+
+            <ui:define name="title">
+                登录
+            </ui:define>
+
+            <ui:define name="box">
+                <h:form>
+                    <h:outputLabel for="usernameInput">
+                        用户名:
+                    </h:outputLabel>
+                    <h:inputText id="usernameInput" value="#{CurrentUserBean.name}" 
+                                 required="true" />
+                    <br />
+                    <h:outputLabel for="passwordInput">
+                        密码:
+                    </h:outputLabel>
+                    <h:inputSecret id="passwordInput" value="#{CurrentUserBean.password}" 
+                                   required="true" />
+                    <br />
+                    <h:commandButton value="提交" 
+                                     action="#{CurrentUserBean.loginAndRedirectView()}" />
+                </h:form>
+
+            </ui:define>
+
+            <ui:define name="rightColumn">
+                <pre>
+                这个EXAMPLE使用的是FORM LOGIN, 用户由JAVA EE容器管理.                
+                因此用户应当在JAVA EE容器中创建.
+
+                下面给出GLASSFISH的创建用户步骤: 
+                使用Realm为file, 使用server-config
+                <h:graphicImage library="theme1" name="img/login/1.png" style="width:80%; height:80%"/>   
+                
+                点击管理用户, 用户要属于项目给出的appadmin/appuser这两个组. 详见web.xml
+                <h:graphicImage library="theme1" name="img/login/2.png"  style="width:100%; height:100%"/>   
+                
+                创建用户后,使用默认PRINCIPAL映射:
+                <h:graphicImage library="theme1" name="img/login/3.png"  style="width:100%; height:100%"/>   
+                </pre>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

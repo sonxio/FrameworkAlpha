@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<sql:query var="categories" dataSource="jdbc/affablebean">
+<%-- sql:query var="categories" dataSource="jdbc/affablebean">
     SELECT * FROM category
 </sql:query>
 
@@ -22,16 +22,17 @@
 <sql:query var="categoryProducts" dataSource="jdbc/affablebean">
     SELECT * FROM product WHERE category_id = ?
     <sql:param value="${pageContext.request.queryString}"/>
-</sql:query>
-
+</sql:query --%>
 
 <!-- 获取JSP参数 -->
-<p id="categoryTitle">${selectedCategory.rows[0].name}</p>
+<p id="categoryTitle">
+    <span style="background-color: #f5eabe; padding: 7px;">${selectedCategory.name}</span>
+</p>
 
 <div id="categoryLeftColumn">
     
     <!-- pageContext.request.queryString也是在DEBUG时要查找的属性的位置 -->
-    <c:forEach var="category" items="${categories.rows}">
+    <c:forEach var="category" items="${categories}">
         <c:choose>
             <c:when test="${category.id == pageContext.request.queryString}">
                 <div class="categoryButton" id="selectedCategory">
@@ -56,7 +57,7 @@
 
 <table id="productTable">
 
-    <c:forEach var="product" items="${categoryProducts.rows}" varStatus="iter">
+    <c:forEach var="product" items="${categoryProducts}" varStatus="iter">
 
         <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
             <td>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/common/template.xhtml">
+
+            <ui:define name="title">
+                登录失败
+            </ui:define>
+
+            <ui:define name="box">
+                提供的信息有误,不能登录.
+
+                <h:form prependId="false">
+
+                    <h:commandButton id="backButton" value="返回" action="/login/form_login" />
+
+                </h:form>
+            </ui:define>
+            <ui:define name="rightColumn">
+                <h:graphicImage library="theme1" name="img/duke.png" />                
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

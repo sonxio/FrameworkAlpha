@@ -3,10 +3,6 @@
 <%@page pageEncoding="UTF-8"%>
 
 
-<sql:query var="categories" dataSource="jdbc/affablebean">
-    SELECT * FROM category
-</sql:query>
-
 <div id="indexLeftColumn">
     <div id="welcomeText">
         <p>[ welcome text ]<!-- test to access context parameters -->
@@ -17,7 +13,8 @@
 </div>
 
 <div id="indexRightColumn">
-    <c:forEach var="category" items="${categories.rows}">
+    <!-- $ {categories}信息来自ControllerServlet.init,是从EJB加载的数据 -->
+    <c:forEach var="category" items="${categories}">
         <div class="categoryBox">
             <a href="category?${category.id}">
 

@@ -10,23 +10,47 @@
         <param-value>img/categories/</param-value>
     </context-param>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
     <jsp-config>
         <jsp-property-group>
-            <description>header and footer settings 测试配置文件中编码是否正常</description>
+            <description>下面指定了需要自动添加HEADER/SETTER的URL PATTERN. 也可以写多个.</description>
             <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/login.jsp</url-pattern>
+            <url-pattern>/error.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>
-    <resource-ref>
+    <!--resource-ref>
         <res-ref-name>jdbc/affablebean</res-ref-name>
         <res-type>javax.sql.ConnectionPoolDataSource</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
-    </resource-ref>
+    </resource-ref-->
+    <security-constraint>
+        <display-name>Constraint1</display-name>
+        <web-resource-collection>
+            <web-resource-name>Affable Bean Administration</web-resource-name>
+            <description/>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>affableBeanAdmin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>affableBeanAdmin</role-name>
+    </security-role>
 </web-app>
