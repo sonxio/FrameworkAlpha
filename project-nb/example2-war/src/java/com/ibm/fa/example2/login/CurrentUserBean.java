@@ -1,4 +1,4 @@
-package com.ibm.fa.item.login;
+package com.ibm.fa.example2.login;
 
 import java.io.Serializable;
 import java.security.Principal;

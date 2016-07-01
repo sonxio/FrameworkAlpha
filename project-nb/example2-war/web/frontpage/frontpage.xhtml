@@ -11,14 +11,14 @@
             <ui:define name="title">
                 Response
             </ui:define>
-
+            
             <ui:define name="box">
                 <h4><h:outputText escape="false" value="#{CurrentUserBean.welcomeMsg}"/></h4>
-
+                <h:link value="进入ITEM列表" outcome="/item/List.xhtml">
+                    <h:graphicImage library="theme1" name="img/item/item.png" style="width:10%"/>                    
+                </h:link>
                 <h:form prependId="false">
-
                     <h:commandButton id="backButton" value="返回" action="inputDeviceId" />
-
                 </h:form>
             </ui:define>
             <ui:define name="rightColumn">

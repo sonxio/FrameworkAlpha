@@ -25,7 +25,7 @@
             <web-resource-name>appuser resource</web-resource-name>
             <description>开放给普通用户访问的页面</description>
             <!-- 注意:这里的URL PATTERN不能包括/*,否则将会导致RESOURCE不能加载,例如CSS/JS/IMAGE等 
-            对于需要开放给appuser的URL PATTER你这里都要逐一写下,一来方便权限的细化控制,二来避免未上线的内容错误被用户访问-->            
+            对于需要开放给appuser的URL PATTER你这里都要逐一写下,一来方便权限的细化控制,二来避免未上线的内容错误被用户访问-->
             <url-pattern>/frontpage/*</url-pattern>
             <url-pattern>/item/*</url-pattern>
             <!-- 这里目前没有对HTTP METHOD进行限制,例如GET/POST/TRACK,是因为目前不确定限制后,对于没有提及的HTTP METHOD是不允许还是允许.将来可以不在APP层面进行限制,而在WEB SERVER层限制 -->
@@ -64,4 +64,10 @@
         <description>普通用户</description>
         <role-name>appuser</role-name>
     </security-role>
+    <resource-ref>
+        <res-ref-name>java:app/jdbc/example2</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
 </web-app>
