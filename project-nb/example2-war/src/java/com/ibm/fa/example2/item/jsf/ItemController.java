@@ -22,12 +22,15 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class ItemController implements Serializable {
 
+    //current为当前使用的ITEM对象
     private Item current;
+    //selectedXXXIndex为当前对象在当前页面的INDEX, current和selectedItemIndex两个对象总要同时修改
+    private int selectedItemIndex;
+    //当前页面的ITEM DATA MODEL
     private DataModel items = null;
     @EJB
     private com.ibm.fa.example2.item.bean.ItemFacade ejbFacade;
     private PaginationHelper pagination;
-    private int selectedItemIndex;
 
     public ItemController() {
     }
@@ -48,17 +51,24 @@ public class ItemController implements Serializable {
         return ejbFacade;
     }
 
+    /**
+     * 创建分页对象,创建首页DATA MODEL
+     * @return 
+     */
     public PaginationHelper getPagination() {
         if (pagination == null) {
+            //PaginationHelper是abstract的,不能直接使用
             pagination = new PaginationHelper(10) {
 
                 @Override
                 public int getItemsCount() {
+                    //总数每次访问都从DB查询得到
                     return getFacade().count();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
+                    //创建第一页的DATA MODEL,作为初始值
                     return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
@@ -71,7 +81,13 @@ public class ItemController implements Serializable {
         return "List";
     }
 
+    /**
+     * 用于在LIST页面上跳转到显示VIEW的页面
+     * <h:commandLink action="#{itemController.prepareView}" value="#{bundle.ListItemViewLink}"/>
+     * @return 
+     */
     public String prepareView() {
+        
         current = (Item) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
@@ -158,6 +174,10 @@ public class ItemController implements Serializable {
         }
     }
 
+    /**
+     * 获取当前页的数据对象,如果还没有,则创建首页数据对象
+     * @return 
+     */
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();

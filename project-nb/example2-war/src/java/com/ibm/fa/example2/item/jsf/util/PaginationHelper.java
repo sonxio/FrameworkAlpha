@@ -2,6 +2,10 @@ package com.ibm.fa.example2.item.jsf.util;
 
 import javax.faces.model.DataModel;
 
+/**
+ * 用于在LIST页面显示分页
+ * @author song
+ */
 public abstract class PaginationHelper {
 
     private int pageSize;
