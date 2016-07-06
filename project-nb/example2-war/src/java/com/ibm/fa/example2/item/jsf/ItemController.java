@@ -17,11 +17,14 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.jboss.logging.Logger;
 
 @Named("itemController")
 @SessionScoped
 public class ItemController implements Serializable {
-
+    //注意,使用统一命名,一律为l,写法也统一,仅定义为private,不使用static
+    private Logger l = Logger.getLogger(this.getClass().getName());
+    
     //current为当前使用的ITEM对象
     private Item current;
     //selectedXXXIndex为当前对象在当前页面的INDEX, current和selectedItemIndex两个对象总要同时修改
@@ -77,6 +80,7 @@ public class ItemController implements Serializable {
     }
 
     public String prepareList() {
+        l.debug("preparing list");
         recreateModel();
         return "List";
     }
@@ -87,9 +91,10 @@ public class ItemController implements Serializable {
      * @return 
      */
     public String prepareView() {
-        
+        l.info("preparing view");//可以在GLASSFISH SERVER CONSOLE中看到该输出:Info:   preparing view
         current = (Item) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        l.trace("selectedItemIndex: "+selectedItemIndex);
         return "View";
     }
 

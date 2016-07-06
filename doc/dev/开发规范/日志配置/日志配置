@@ -1,0 +1,55 @@
+首先在FA项目中找到logging.properties模板
+
+#这份文件请根据本机的位置,修改GLASSFISH DOMAIN中config/domain.xml
+#在domain.xml增加如下内容:在jvm-config一节末尾增加(其中路径改为本机真实路径)
+#<jvm-options>-Djava.util.logging.config.file=/Users/song/TEMP/logging-unix.properties</jvm-options>
+#</java-config>
+
+修改好的domain.xml示例路径如下：
+~/Applications/payara41/glassfish/domains/domain1/config $vi domain.xml
+~/Applications/payara41/glassfish/domains/domain1/config $
+
+
+java-config一节末尾内容如下：
+	 <jvm-options>-Dfelix.fileinstall.bundles.new.start=true</jvm-options>
+        <jvm-options>-Dfelix.fileinstall.bundles.startTransient=true</jvm-options>
+        <jvm-options>-Dfelix.fileinstall.disableConfigSave=false</jvm-options>
+        <jvm-options>-XX:NewRatio=2</jvm-options>
+        <jvm-options>-Dcom.ctc.wstx.returnNullForDefaultNamespace=true</jvm-options>
+        <jvm-options>-Djdk.tls.rejectClientInitiatedRenegotiation=true</jvm-options>
+        <jvm-options>-Dorg.jboss.weld.serialization.beanIdentifierIndexOptimization=false</jvm-options>
+        <jvm-options>-Djava.util.logging.config.file=/Users/song/TEMP/logging-unix.properties</jvm-options>
+      </java-config>
+
+完成后，在CLASS文件中，每个文件开头如此获得LOGGER：
+@Named("itemController")
+@SessionScoped
+public class ItemController implements Serializable {
+    //注意,使用统一命名,一律为l,写法也统一,仅定义为private,不使用static
+    private Logger l = Logger.getLogger(this.getClass().getName());
+
+
+需要记录日志时如此处理：
+    /**
+     * 用于在LIST页面上跳转到显示VIEW的页面
+     * <h:commandLink action="#{itemController.prepareView}" value="#{bundle.ListItemViewLink}"/>
+     * @return 
+     */
+    public String prepareView() {
+        l.info("preparing view");//可以在GLASSFISH SERVER CONSOLE中看到该输出:Info:   preparing view
+        current = (Item) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        l.trace("selectedItemIndex: "+selectedItemIndex);
+        return "View";
+    }
+
+
+项目只使用JAVA自带的LOGGER，不使用LOG4J。
+
+
+
+
+
+
+
+
