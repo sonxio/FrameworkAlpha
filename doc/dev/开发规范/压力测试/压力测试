@@ -1,0 +1,3 @@
+目前考察了JMETER，如果没有LOADRUNNER可用，JMETER是免费开源的，并能提供一系列图表。也是一个好的测试办法。
+
+NETBEANS支持JMETER的PLUGIN，此外JMETER也可以从APACHE网站下载。
