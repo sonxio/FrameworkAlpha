@@ -1,3 +1,5 @@
-JSF技术和AJAX技术同时使用并不方便，不建议使用AJAX，避免繁杂的JAVASCRIPT数据处理，降低开发复杂度。
+JSF内置AJAX使用，不需要直接调用。
+
+使用JSF同时直接调用AJAX使用并不方便，不建议使用AJAX，尽量简化的JAVASCRIPT数据处理，降低开发复杂度。
 
 数据处理使用JSF CONTROLLER BEAN实现。
